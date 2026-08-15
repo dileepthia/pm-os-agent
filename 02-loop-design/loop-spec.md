@@ -9,37 +9,44 @@
 
 ## 1. Trigger & loop type
 
-**Chosen type:** _heartbeat · cron · hook · goal_
+**Chosen type:** Cron (scheduled weekly)
 
-_Why this type? (e.g. a Monday-morning cron that assembles the weekly update, plus a hook on a new PRD to propose stories.)_
+**Trigger:** Weekly at a fixed time (e.g., Monday 9am UTC)
+
+**Why:** Status updates are periodic events sent at predictable intervals. A cron schedule is resource-efficient and aligns with sprint cadence, eliminating the need for reactive triggers (hook) or resource-wasteful polling (heartbeat).
+
+**Idempotency:** If cron fires twice, check the last run timestamp (stored in state). Skip if another run completed within the last 24 hours.
+
+**Ruled out:**
+- Hook: No external trigger; updates are internally scheduled
+- Heartbeat: Wasteful; we only need status at send time
+- Goal: Not applicable; success = draft completed, not iterative validation
 
 ## 2. Goal / definition of done
 
-_What outcome is this loop responsible for? For a goal loop, what validation says "done"? (e.g. a status update grounded in real activity, queued for review, nothing posted.)_
+Draft status update written, validated by critic, and queued for human approval. Cortex never posts; human reviews before send. Either all conditions are successfully met by Cortex, or they are escalated and passed to human via HITL checkpoint.
 
 ## 3. Stop conditions
 
 | Condition | What it looks like | What happens |
 |---|---|---|
-| **Success** | _…_ | _…_ |
-| **Stuck / give up** | _…_ | _escalate / log / halt_ |
-| **Escalate to human** | _…_ | _HITL checkpoint (from agent-line-map)_ |
+| **Success** | Critic validates draft. All data pulled. Draft passes validation or is queued for human approval at HITL checkpoint. | Loop exits cleanly. Draft saved to `run-output/`. |
+| **Stuck / give up** | Cannot pull project state from primary source after 3 retries. | Log error. Stop loop. Escalate to human with context. |
+| **Escalate to human** | Embargoed/confidential content detected, OR story batch exceeds 10-item cap, OR public GA-date commitment mentioned. | Hold draft. Flag for human review at HITL checkpoint. Do not queue for send. |
 
 ## 4. State
 
-_What persists across iterations, and what's the scope? (e.g. per-project context and last week's update; no cross-project confidential leakage.)_
+Last run timestamp (for 24-hour dedupe check). Previous 3 weekly updates (tone, structure, format, language reference). List of monitored projects.
 
 ## 5. The five things a loop can lean on
 
-_`state` is always-on. `connectors` only if you already have one wired (e.g. a Jira key or Google MCP) — otherwise just note it as a plan. `skills`, `subagents`, `work tree` scale with autonomy; "not needed yet, because…" is a valid answer._
-
 | Component | For Cortex |
 |---|---|
-| **Work tree** (isolated workspace per run, a git worktree) | _…_ |
-| **Skills** (reusable capabilities) | _…_ |
-| **Plugins / connectors** (tools & access, optional if you don't have one yet) | _…_ |
-| **Subagents** (independent check when the loop can't grade itself) | _placeholder → M3 orchestration-map.md_ |
-| **State tracking** | _…_ |
+| **Work tree** (isolated workspace per run, a git worktree) | YES — isolated run per week. Allows rollback to any week's version if needed. |
+| **Skills** (reusable capabilities) | Data Quality Checker (validate pulled project state). Content Policy Checker (detect embargoed content). |
+| **Plugins / connectors** (tools & access, optional if you don't have one yet) | Pre-flight check before each run: Jira accessible? Slack accessible? Calendar accessible? Fail gracefully if a connector is down. |
+| **Subagents** (independent check when the loop can't grade itself) | Critic (in agent.py) validates draft before queueing. Sufficient for M2; escalate to independent validator in M3+ if needed. |
+| **State tracking** | Always-on. Tracks: last run timestamp, previous 3 updates, monitored projects list. |
 
 > Context plan (M4) and the hand-off to bounds & evals (M5) come in later modules — you'll add them to their own deliverables then, not here.
 
