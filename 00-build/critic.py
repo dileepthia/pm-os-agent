@@ -12,20 +12,21 @@ from prompts import CRITIC_SYSTEM
 
 def review(client, model: str, proposed_output: str, source_data: str) -> dict:
     """Return {"verdict": "pass"|"fail", "reasons": [...]} for a proposed output."""
-    resp = client.chat.completions.create(
+    resp = client.messages.create(
         model=model,
+        max_tokens=1024,
+        system=CRITIC_SYSTEM,
         messages=[
-            {"role": "system", "content": CRITIC_SYSTEM},
             {"role": "user", "content":
                 f"SOURCE DATA Cortex used:\n{source_data}\n\n"
                 f"CORTEX PROPOSED OUTPUT:\n{proposed_output}"},
         ],
-        response_format={"type": "json_object"},
     )
     usage = resp.usage
     try:
-        verdict = json.loads(resp.choices[0].message.content)
+        content = next((block.text for block in resp.content if hasattr(block, "text")), "")
+        verdict = json.loads(content)
     except (json.JSONDecodeError, TypeError):
         verdict = {"verdict": "fail", "reasons": ["critic returned unparseable output"]}
-    verdict["_usage"] = {"prompt": usage.prompt_tokens, "completion": usage.completion_tokens}
+    verdict["_usage"] = {"prompt": usage.input_tokens, "completion": usage.output_tokens}
     return verdict
