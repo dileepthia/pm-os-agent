@@ -22,7 +22,7 @@ Real screenshots of *your* Cortex running. These are the `00-build/CORTEX-ANATOM
 | # | Screenshot | What it shows | From |
 |---|---|---|---|
 | 1 | _[img]_ | happy-path run: a real drafted update + the HITL checkpoint (queued, not posted) | M2 |
-| 2 | _[img]_ | the critic rejecting a bad draft (revise/block) | M3 |
+| 2 | ✅ **CAPTURED** | Critic rejected the draft **twice** (revision 1/2, then revision 2/2) with verdict `"fail"` and reason `"unparseable output"`. Revision cap enforced: `"REVISION CAP hit (2). Escalating to a human instead of looping."` Loop halted, escalated to human, and saved draft to `run-output/status-update-happy.md` without posting. Cost tracked: ~$0.0283. | M3 |
 | 3 | _[img]_ | a grounded update citing pulled activity + a caught hallucination | M4 |
 | 4 | _[img]_ | jailbreak refused + escalated | M5 |
 | 5 | _[img]_ | an iteration/cost/queue bound halting a runaway | M5 |
