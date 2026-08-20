@@ -8,18 +8,23 @@
 
 ## 1. Context budget
 
-_What does each loop iteration actually receive, and why? (You can't fit everything, what's the priority order?)_
+**Priority order (what Cortex always sees):**
+1. **Long-context first:** Task brief (`get_task`) + last 3 past updates (`search_past_updates`)
+2. **Retrieve on-demand:** Activity (volatility), roadmap (confidential gating), team norms (freshness)
+
+**Rationale:** Keep the task and tone reference always in view (latency matters; they're stable). For everything else — activity, roadmap, norms — retrieve fresh to avoid staleness and manage confidential content filtering. This keeps the base context window tight while ensuring Cortex always has current, audited data.
 
 ## 2. Retrieve vs. long-context: per source
 
 For each data source, decide: **retrieve** (narrow a large/changing corpus to the relevant slice) or **long-context** (just include a bounded set you can reason over).
 
-| Source | Size / volatility | Decision | Why |
-|---|---|---|---|
-| _Roadmap_ | _large, slow-changing_ | _Retrieve_ | _too big to include; need the relevant slice (and respect confidential flags)_ |
-| _GitHub/Jira activity_ | _large, changing_ | _Retrieve_ | _… + audit/citation needs_ |
-| _This week's task brief_ | _bounded_ | _Long-context_ | _reason over the whole thing_ |
-| _Team norms / playbook_ | _bounded_ | _Long-context_ | _… _ |
+| Source | Size / volatility | Decision | Deciding factor | Why |
+|---|---|---|---|---|
+| `get_task` | Bounded, static | Long-context | Latency | Task brief is always in view; no retrieval round-trip needed. |
+| `search_past_updates` | Unbounded, stable | Long-context | Latency | Keep last 3 updates in system prompt for tone/format reference; no retrieval overhead. |
+| `get_activity` | Large, changes daily | Retrieve | Volatility | Activity changes daily; can't bake into long-context or it goes stale. Retrieve ensures fresh PRs, issues, Sev-1s. |
+| `get_roadmap` | Medium, slow-changing | Retrieve | Citation/audit | Roadmap contains confidential items; filter at retrieval time so Cortex only sees non-confidential public items (principle of least privilege). |
+| `get_norms` | Medium, must stay current | Retrieve | Volatility | Team norms can change; can't hardcode stale rules. Retrieve ensures Cortex always operates on current playbook. |
 
 ## 3. Retrieval quality plan
 
