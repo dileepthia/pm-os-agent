@@ -49,16 +49,16 @@ For each **retrieve** source, which agentic moves apply? (This is what separates
 
 | Memory type | What Cortex stores | Scope / TTL |
 |---|---|---|
-| **Working** (in-loop) | _…_ | _this run_ |
-| **Episodic** (past runs) | _past status updates, decisions_ | _…_ |
-| **Semantic** (durable facts/prefs) | _team norms, roadmap facts_ | _…_ |
-| **Shared** (across agents) | _…_ | _…_ |
+| **Working** (in-loop) | Current task brief + retrieved activity/roadmap/norms + status update draft in progress | This run only (~1 hour); discarded after draft is sent to PM |
+| **Episodic** (past runs) | Past activity history (PRs, issues) + past decisions (what was flagged red, escalated, resolved) | 3 months (rolling window; helps spot trends & context) |
+| **Semantic** (durable facts/prefs) | Team norms + preferences + key stakeholders | Refresh each run (via `get_norms` retrieve); stakeholders updated on change (event-driven) |
+| **Shared** (across agents) | Draft + source data (what was pulled) + critic feedback + revisions | 30 days after report is sent (reference window for questions; then archived) |
 
 ## 5. Memory risks & mitigations
 
-| Risk | Mitigation |
-|---|---|
-| _Drift_ | _…_ |
-| _Poisoning_ | _…_ |
-| _Staleness_ | _…_ |
-| _Confidential / retention_ | _scoping + flags (Cortex touches embargoed roadmap)_ |
+| Risk | Where it bites | Mitigation |
+|---|---|---|
+| **Drift** | Norms change, but Cortex uses stale rules (wrong format, outdated policy). Roadmap facts drift as projects ship. Key stakeholders change. | Norms: refresh each run via `get_norms` retrieve. Roadmap: update periodically (weekly with sprint cycle). Stakeholders: update on change (event-driven). |
+| **Poisoning** | Bad data in source (false metric, fake PR, corrupted issue). Cortex retrieves it, cites it, pollutes the draft. | Self-verification (Step 2): Cortex grounds claims in retrieved data. Critic + PM review catch mismatches or false citations. |
+| **Staleness** | Old activity (closed PRs from Q2), outdated decisions (resolved escalations) clog retrieval, make context irrelevant. | Bounded retrieval window: `get_activity` retrieves only this week (7 days). Document grading: filter for relevant activity only, discard old/closed work. |
+| **PII / retention** | Activity, updates, norms may contain PII (email addresses, personal notes in issues). Retained too long = compliance risk. | Filter at retrieval time: only de-PII'd data passed to Cortex. Enforce TTLs: 30 days for shared drafts, 3 months for episodic history. Purge older data. |
