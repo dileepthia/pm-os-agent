@@ -28,13 +28,22 @@ For each data source, decide: **retrieve** (narrow a large/changing corpus to th
 
 ## 3. Retrieval quality plan
 
-_Which of these apply, and how? (This is what separates modern agentic retrieval from naive "embed → top-k → stuff".)_
+For each **retrieve** source, which agentic moves apply? (This is what separates modern agentic retrieval from naive "embed → top-k → stuff".)
 
-- **Routing**: _which source to query?_
-- **Document grading**: _is what I retrieved actually relevant?_
-- **Reranking**: _…_
-- **Self-verification**: _did the update use the retrieved evidence?_
-- **Caching**: _…_
+**Five moves:**
+- **Routing:** Which source to query?
+- **Document grading:** Is what I retrieved actually relevant?
+- **Reranking:** Reorder results by relevance.
+- **Self-verification:** Did the update use the retrieved evidence? Did Cortex ground claims in retrieved data?
+- **Caching:** Cache results to avoid re-retrieving the same data.
+
+**Applied to our retrieve sources:**
+
+| Source | Moves | Why |
+|---|---|---|
+| `get_activity` | Document grading + self-verification | Grade for relevant activity only (this week's PRs/issues, not all history). Verify Cortex cited the activity it retrieved (e.g., PRs #820, #823 are real). |
+| `get_roadmap` | Document grading + self-verification | Grade retrieved roadmap for Northstar-specific items (don't include unrelated initiatives). Verify Cortex cited roadmap items correctly without leaking confidential content. |
+| `get_norms` | Reranking + self-verification | Rerank norms by relevance to status-update task (format/tone rules first, sprint-planning rules lower). Verify Cortex followed the norms in the draft (no unconfirmed dates, no overcommitments, format matches team style). |
 
 ## 4. Memory map (your PM brain)
 
