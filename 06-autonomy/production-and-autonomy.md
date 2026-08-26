@@ -10,8 +10,9 @@ _Autonomy is a product decision per user, not one global setting._
 
 | Segment | Desired autonomy | Why |
 |---|---|---|
-| _Cautious PM ("Tesla driver")_ | _supervised_ | _wants to review every update before it goes out_ |
-| _High-trust team lead ("Waymo passenger")_ | _bounded-autonomous_ | _happy to let the weekly update assemble itself_ |
+| **Exec stakeholder** | **Bounded-autonomous** | Downstream of HITL checkpoint (PM approval happens before exec sees it); receives final approved updates only |
+| **Engineering leads** | **Supervised** | Review roadmap/priorities after Cortex sends; loop back to PM for adjustments if needed |
+| **Program managers** | **Bounded-autonomous** | FYI only — no approval authority; just need visibility into roadmap to plan resource allocation and project execution |
 
 ## Trust Ladder
 
