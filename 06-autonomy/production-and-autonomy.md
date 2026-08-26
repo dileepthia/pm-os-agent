@@ -38,11 +38,11 @@ _Autonomy is a product decision per user, not one global setting._
 
 ## Widen-autonomy decision rule
 
-_What evidence lets you turn the dial up one notch, stated in advance._
+Move from Assisted to Supervised when: Cortex passes all eval gates (≥99% grounding, 0 leaks, cost ≤$0.50/run) for 12 consecutive runs with zero major incidents.
 
 ## Governance & forward strategy
 
-- **Compliance:** _what data must never enter a prompt; how PII is handled_
-- **Safety:** _which actions stay above the agent line for everyone; kill switch_
-- **Reliability:** _cost/iteration caps; escalate-on-stuck; fallback if the model is down_
-- **Strategy:** _the next segment or capability you'd widen into, and the eval that gates it_
+- **Compliance:** Launch dates (unconfirmed GA dates), strategic plans (M&A, layoffs, internal decisions), and embargoed roadmap items must NEVER enter a prompt. Enforced at retrieval time (get_roadmap, get_norms filtered for public only).
+- **Safety:** All above-the-line actions (posting/sending updates, marking launch gates, committing dates publicly) stay HUMAN always — no dial level changes this. Kill switch: Dil (PM Lead) can shut down Cortex. If Dil unreachable, Jim (PM Director) can.
+- **Reliability:** Cost cap $0.50/run, iteration cap 8, revision cap 2. Escalate-on-stuck after 3 retries on a tool call. Model-down fallback: if Claude API down, retry after 1 hour. NEVER use cached draft; OK to delay or skip report, but NEVER send stale data.
+- **Strategy:** Next segment to widen = other PMs (beyond Dil's usage). Gate: Dil confirms 12 consecutive successful runs with all eval gates passing. Then move them from Assisted to Supervised using the same eval gate as Dil's cohort.
