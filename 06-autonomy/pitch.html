@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cortex PM Chief-of-Staff Agent, Pitch</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root{--bg:#07162C;--fg:#ffffff;--muted:#ffffff;--accent:#60a5fa;--accent2:#79c0ff;--line:rgba(255,255,255,0.08);--card:rgba(255,255,255,0.035)}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Lato',-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh;overflow-x:hidden;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(96,165,250,0.10) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 90% 90%,rgba(124,140,255,0.08) 0%,transparent 60%);pointer-events:none;z-index:0}
+main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:80px 40px 0}
+h1,h2,h3{font-family:'Poppins',sans-serif;letter-spacing:-0.01em;margin:0}
+a{color:var(--accent);text-decoration:none}
+code{font-family:'IBM Plex Mono',monospace}
+.hero{text-align:center;margin-bottom:100px}
+.hero .badge{display:inline-block;font-family:'Poppins',sans-serif;font-size:10.5px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.30);border-radius:999px;padding:6px 14px;margin-bottom:26px}
+.hero h1{font-size:clamp(42px,7vw,80px);font-weight:900;line-height:1.02;margin:0 0 22px;background:linear-gradient(135deg,#ffffff 0%,#79c0ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:clamp(18px,2.2vw,26px);color:#ffffff;max-width:760px;margin:0 auto 30px;line-height:1.5}
+.hero .meta{font-family:'Poppins',sans-serif;font-size:13.5px;color:var(--muted);letter-spacing:0.06em;margin:0 0 30px}
+.hero .ctas{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.hero .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:13px 28px;border-radius:999px;font-family:'Poppins',sans-serif;font-weight:800;font-size:14px;box-shadow:0 10px 30px rgba(96,165,250,0.30);transition:transform 0.15s,box-shadow 0.15s}
+.hero .cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(96,165,250,0.40)}
+.hero .cta.secondary{background:transparent;border:1px solid var(--line);color:var(--fg);box-shadow:none}
+section.block{margin-bottom:100px}
+.eyebrow{font-family:'Poppins',sans-serif;font-size:11px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.block h2{font-size:clamp(30px,4vw,46px);font-weight:800;margin:0 0 12px;color:#fff}
+.block .lede{font-size:16px;color:var(--muted);margin:0 0 36px;max-width:680px;line-height:1.55}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.m-card{background:var(--card);border:1px solid color-mix(in srgb,var(--col) 40%,transparent);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.m-card .m-head{padding:18px 22px;background:linear-gradient(135deg,color-mix(in srgb,var(--col) 18%,transparent) 0%,transparent 70%);border-bottom:1px solid color-mix(in srgb,var(--col) 25%,transparent)}
+.m-card .m-num{font-family:'Poppins',sans-serif;font-size:26px;font-weight:900;line-height:1;color:var(--col);margin-bottom:5px}
+.m-card .m-num .m-emoji{font-size:22px;margin-left:4px}
+.m-card .m-name{font-family:'Poppins',sans-serif;font-size:17px;font-weight:800;color:#fff}
+.m-card .m-body{padding:14px 22px 18px}
+.m-card .m-link{display:flex;align-items:center;gap:8px;font-size:13px;color:#ffffff;margin:8px 0;text-decoration:none}
+.m-card .m-link code{font-size:11.5px;background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:6px;color:#ffffff}
+.m-card .m-link:hover code{background:rgba(255,255,255,0.10);color:#fff}
+.m-card .m-link.missing{opacity:0.42;font-style:italic}
+.m-card .m-arrow{color:var(--col);font-weight:800}
+.exec-rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.exec-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px}
+.exec-card .exec-step{display:inline-block;font-family:'Poppins',sans-serif;font-size:10.5px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.exec-card h3{font-size:15px;font-weight:800;color:#fff;margin:0 0 12px}
+.exec-card .exec-body{font-size:12.5px;color:#ffffff;line-height:1.6}
+.exec-card .exec-body em{color:var(--muted)}
+.insights-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.insight{background:var(--card);border:1px solid;border-radius:14px;padding:24px 26px}
+.insight .ic-label{font-family:'Poppins',sans-serif;font-size:10.5px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:12px}
+.insight h3{font-size:17px;font-weight:800;margin:0;color:#fff;line-height:1.45}
+.loom-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px;text-align:center;margin-bottom:60px}
+.loom-wrap a{display:inline-flex;align-items:center;gap:10px;background:rgba(124,140,255,0.10);border:1px solid rgba(124,140,255,0.30);color:#bcb1ff;padding:13px 26px;border-radius:999px;font-family:'Poppins',sans-serif;font-weight:800;font-size:14px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:40px 20px;border-top:1px solid var(--line);margin-top:60px;letter-spacing:0.04em}
+@media(max-width:800px){.insights-row{grid-template-columns:1fr}main{padding:60px 24px 0}}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <span class="badge">Agentic Loops for PMs Certification</span>
+    <h1>Cortex PM Chief-of-Staff Agent</h1>
+    <p class="lead">An AI agent that drafts weekly executive summary report with human approval gates</p>
+    <p class="meta">Dileep Thiagarajan · Agentic Loops for PMs Cohort · August 2026</p>
+    <div class="ctas"><a class="cta" href="https://github.com/dileepthia/pm-os-agent" target="_blank" rel="noopener">View the repo &rarr;</a></div>
+  </section>
+  <section class="block">
+    <div class="eyebrow">Module artifacts</div>
+    <h2>The 6 building blocks</h2>
+    <p class="lede">Six modules. Six artifacts. One coherent body of work that turns Cortex from a line on a page into a bounded, shippable agent.</p>
+    <div class="modules-grid"><div class="m-card" style="--col:#3b82f6"><div class="m-head"><div class="m-num">M1 <span class="m-emoji">&#x1F4CF;</span></div><div class="m-name">The Agent Line</div></div><div class="m-body"><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/01-agent-line/agent-line-map.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Agent-line map: <code>01-agent-line/agent-line-map.md</code></a></div></div><div class="m-card" style="--col:#fbbf24"><div class="m-head"><div class="m-num">M2 <span class="m-emoji">&#x1F501;</span></div><div class="m-name">Loop Engineering</div></div><div class="m-body"><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/02-loop-design/loop-spec.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Loop spec: <code>02-loop-design/loop-spec.md</code></a></div></div><div class="m-card" style="--col:#bcb1ff"><div class="m-head"><div class="m-num">M3 <span class="m-emoji">&#x1F9E9;</span></div><div class="m-name">Orchestration &amp; Subagents</div></div><div class="m-body"><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/03-orchestration/orchestration-map.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Orchestration map: <code>03-orchestration/orchestration-map.md</code></a></div></div><div class="m-card" style="--col:#34d399"><div class="m-head"><div class="m-num">M4 <span class="m-emoji">&#x1F9E0;</span></div><div class="m-name">Context Engineering &amp; Memory</div></div><div class="m-body"><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/04-memory-context/memory-and-context.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Memory &amp; context: <code>04-memory-context/memory-and-context.md</code></a></div></div><div class="m-card" style="--col:#f472b6"><div class="m-head"><div class="m-num">M5 <span class="m-emoji">&#x1F6E1;&#xFE0F;</span></div><div class="m-name">Bounds &amp; Evals</div></div><div class="m-body"><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/05-bounds-evals/bounds-and-evals.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Bounds &amp; evals: <code>05-bounds-evals/bounds-and-evals.md</code></a></div></div><div class="m-card" style="--col:#79c0ff"><div class="m-head"><div class="m-num">M6 <span class="m-emoji">&#x1F39A;&#xFE0F;</span></div><div class="m-name">Autonomy &amp; Production</div></div><div class="m-body"><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/06-autonomy/production-and-autonomy.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Production &amp; autonomy: <code>06-autonomy/production-and-autonomy.md</code></a><a class="m-link" href="https://github.com/dileepthia/pm-os-agent/blob/main/06-autonomy/prototype.md" target="_blank" rel="noopener"><span class="m-arrow">&rarr;</span> Prototype: <code>06-autonomy/prototype.md</code></a></div></div></div>
+  </section>
+  <section class="block">
+    <div class="eyebrow">Ship plan</div>
+    <h2>How I'd ship Cortex</h2>
+    <p class="lede">The autonomy dial per segment, where it sits on the trust ladder, how it deploys, what it returns, and how I keep it safe.</p>
+    <div class="exec-rail"><div class="exec-card"><div class="exec-step">01 &middot; Dial</div><h3>Autonomy per segment</h3><div class="exec-body">Exec stakeholder — Bounded-autonomous (downstream of HITL checkpoint; PM approval before they see it)<br>Engineering leads — Supervised (review after Cortex sends; loop back to PM if adjustments needed)<br>Technical Pgm — Bounded-autonomous (FYI only; visibility for planning)</div></div><div class="exec-card"><div class="exec-step">02 &middot; Ladder</div><h3>Rung + eval gate</h3><div class="exec-body">Current rung: Assisted (Cortex drafts, PM approves every time before send)<br><br>Eval gate to next rung (Supervised):<br><br>≥99% overall accuracy<br>0 confidential leaks<br>EV-1 (grounding) ≥99% pass rate<br>Within cost bounds (EV-5: ≤$0.50/run)<br>Measured over 90 days<br>Incident record: 0 major, ≤1 minor</div></div><div class="exec-card"><div class="exec-step">03 &middot; Deploy</div><h3>Where it runs &amp; who owns it</h3><div class="exec-body">Runtime: Serverless (AWS Lambda), weekly cron<br><br>On-call owner: Dil (PM Lead); escalate to Jim (PM Director) if unavailable<br><br>Rollback: Drop dial from Assisted to Shadow (read-only) if safety issue (leak/jailbreak/cost overrun). Critical failure: disable Lambda.<br><br>Monitoring:<br><br>Eval pass % ≥99% (alert if below)<br>Escalation rate ≤5% (alert if above)<br>Page Dil if: run fails, eval gates fail, leak detected, cost overrun, empty report</div></div><div class="exec-card"><div class="exec-step">04 &middot; ROI</div><h3>Value, not activity</h3><div class="exec-body">ROI metrics (beyond adoption &amp; tokens):<br><br>Manual edits reduced: &lt;5 edits/week<br>Exec satisfaction: ≥4/5 survey score<br>Cost-to-serve: ≤$0.50/run<br>Trust incidents: 0 leaks/report<br><br>Widen-autonomy rule:<br>Move from Assisted to Supervised when: Cortex passes all eval gates (≥99% grounding, 0 leaks, cost ≤$0.50/run) for 12 consecutive runs with zero major incidents.</div></div><div class="exec-card"><div class="exec-step">05 &middot; Governance</div><h3>How I keep it safe</h3><div class="exec-body">Compliance: Launch dates, strategic plans (M&amp;A, layoffs), embargoed roadmap NEVER enter prompt. Enforced at retrieval (get_roadmap/get_norms filtered for public only).<br><br>Safety: All above-the-line actions (posting, marking gates, committing dates) stay HUMAN always. Kill switch: Dil can shut down; Jim if unreachable.<br><br>Reliability: Cost cap $0.50/run, iteration cap 8, revision cap 2. Escalate-on-stuck after 3 retries. Model-down: retry after 1hr, never use cached draft.<br><br>Strategy: Next segment = other PMs. Gate: 12 consecutive runs pass all eval gates with zero major incidents. Then move them from Assisted to Supervised.</div></div></div>
+  </section>
+  <section class="block">
+    <div class="eyebrow">Build insights</div>
+    <h2>What I learned</h2>
+    <p class="lede">The honest three: where it hurt, what clicked, and the moment something changed.</p>
+    <div class="insights-row"><div class="insight" style="border-color:rgba(248,113,113,0.40)"><div class="ic-label" style="color:#f87171">&#x1F635; Friction</div><h3>The hardest part was understanding the agent line — figuring out what actions stay above the line (human-only, never delegated) versus what can go below (candidate for autonomy). It's easy to say &quot;only humans send updates&quot; in theory; actually enforcing it in code and bounds is different. Every tool call is a choice.</h3></div><div class="insight" style="border-color:rgba(96,165,250,0.40)"><div class="ic-label" style="color:#60a5fa">&#x1F9E0; Learning</div><h3>Key #1: Agents with proper evals offload real work. Cortex drafts, validates, and escalates — but the human keeps the approval gate. That's the wedge between &quot;demo agent&quot; and &quot;shipped agent.&quot; The evals make it credible.  Key #2: Start with full human control, then dial autonomy gradually. Assisted → Supervised → Bounded-Autonomous. Each rung has a gate. You don't go from &quot;human presses send&quot; to &quot;agent posts overnight&quot; in one step. Autonomy is a product decision per user segment, not a one-time toggle.  Key #3: Memory context design was a surprise. Deciding what to retrieve fresh (activity, roadmap) vs. what to keep long-context (task, past updates) changed how I think about agent reasoning. Staleness is a failure mode, not just a theory. Retrieval is cheap; hallucination is expensive.</h3></div><div class="insight" style="border-color:rgba(251,191,36,0.40)"><div class="ic-label" style="color:#fbbf24">&#x1F4A1; Aha</div><h3>The autonomy dial unlocked it for me. Once I saw that different users can have different autonomy levels on the same agent — and that each level needs its own eval gate to climb — everything else made sense. Ship the same agent to your power users at Supervised while keeping new users at Assisted. No forking, no &quot;lite&quot; version.</h3></div></div>
+  </section>
+
+  <footer>Dileep Thiagarajan · Agentic Loops for PMs Cohort · August 2026 &middot; Certification submission &middot; Agentic Loops for PMs</footer>
+</main>
+</body>
+</html>
