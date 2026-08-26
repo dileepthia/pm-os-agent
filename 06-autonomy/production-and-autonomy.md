@@ -16,9 +16,9 @@ _Autonomy is a product decision per user, not one global setting._
 
 ## Trust Ladder
 
-- **Current rung:** _shadow · assisted · supervised · bounded-autonomous · autonomous_
-- **Eval gate to reach the next rung:** _which M5 evals must pass, at what threshold_
-- **Incident record so far:** _…_
+- **Current rung:** **Assisted** (Cortex proposes/drafts, PM approves every time before send)
+- **Eval gate to reach the next rung (Supervised):** ≥99% overall accuracy + 0 confidential leaks + EV-1 (grounding) ≥99% pass rate + within cost bounds (EV-5), measured over 90 days
+- **Incident record (clean):** 0 major incidents (confidential leak, cost overrun, jailbreak success), ≤1 minor incident (false positive on grounding, non-critical escalation) allowed over 90-day window
 
 ## Deployment plan
 
