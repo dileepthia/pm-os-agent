@@ -22,18 +22,19 @@ _Autonomy is a product decision per user, not one global setting._
 
 ## Deployment plan
 
-- **Runtime:** _managed agent platform · serverless · self-hosted, and why_
-- **Operator / on-call owner:** _who owns it in production_
-- **Rollback:** _how you turn it off / revert_
-- **Monitoring:** _the dashboard + the signals you watch_
+- **Runtime:** Serverless (AWS Lambda). Runs once per week on cron schedule. No need for 24/7 availability or managed platform overhead; cost-efficient (pay per invocation only).
+- **Operator / on-call owner:** Dil (PM Lead) owns Cortex in production. Escalate to Jim (PM Director) if Dil unavailable.
+- **Rollback:** Drop autonomy dial from Assisted to Shadow (read-only) if safety issue detected (jailbreak success, confidential leak, cost overrun). If critical failure, disable Lambda function.
+- **Monitoring:** Eval pass % ≥99% (alert if below), Escalation rate ≤5% (alert if above). Page Dil if: weekly run doesn't complete with error, eval gates fail, confidential leak detected, cost overrun, error prevents non-empty report.
 
 ## ROI metrics (beyond adoption & tokens)
 
-| Metric | Target |
-|---|---|
-| _Task completion rate_ | _…_ |
-| _Time saved / cost-to-serve_ | _…_ |
-| _Trust incidents_ | _…_ |
+| Metric | Measurement | Target |
+|---|---|---|
+| **Outcome: Manual edits reduced** | Track edits per draft per week | <5 edits per week |
+| **Outcome: Exec satisfaction** | Survey 1-5 scale (5 = most useful) | ≥4 average score |
+| **Cost-to-serve** | $ per run | ≤$0.50 per run |
+| **Trust incidents** | Confidential leaks per report | 0 leaks per report |
 
 ## Widen-autonomy decision rule
 
