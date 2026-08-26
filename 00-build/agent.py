@@ -28,6 +28,10 @@ from __future__ import annotations
 import json
 import os
 import sys
+
+# Handle Unicode output on Windows
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding='utf-8')
 from pathlib import Path
 
 from anthropic import Anthropic
